@@ -1,0 +1,38 @@
+--------------
+Database name
+--------------
+
+simpledb
+
+-----------------
+Tables + columns
+-----------------
+
+person
+    idperson, username, password, user_access, tree_access, herb_access
+
+herbs
+    idherb, name, family
+
+trees
+    idtree, name, family
+
+------------------------
+Example data for tables
+------------------------
+
+person:
+    0, admin, admin, 1, 1, 1
+    1, trees, trees, 0, 1, 0
+    2, herbs, herbs, 0, 0 ,1
+
+trees:
+    1, Oak, Fagaceae
+    2, Yew, Taxaceae
+    3, Beech, Fagaceae 
+
+herbs:
+    1, Mint, Lamiaceae
+    2, Basil, Lamiaceae
+    3, Chamomile, Asteraceae
+
