@@ -10,8 +10,10 @@ require_once 'init.php';
 // Jeżeli użytkownik chce jednak używać bezpośrednio PDO, to biblioteki używamy jedynie w celu połączenia z bazą, a później
 // pobieramy obiekt PDO po połączeniu (metoda pdo() obiektu klasy Medoo).
 
-getRouter()->setDefaultRoute('login'); // akcja/ścieżka domyślna
+getRouter()->setDefaultRoute('welcomePage'); // akcja/ścieżka domyślna
 getRouter()->setLoginRoute('login'); // akcja/ścieżka na potrzeby logowania (przekierowanie, gdy nie ma dostępu)
+
+getRouter()->addRoute('welcomePage',    'HomeCtrl');
 
 getRouter()->addRoute('loginShow',		'LoginCtrl');
 getRouter()->addRoute('login',			'LoginCtrl');

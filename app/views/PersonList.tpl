@@ -1,19 +1,5 @@
 {extends file="main.tpl"}
 
-{block name=top}
-
-<div class="bottom-margin">
-<form class="pure-form pure-form-stacked" action="{$conf->action_url}personList">
-	<legend>Search options</legend>
-	<fieldset>
-		<input type="text" placeholder="Username" name="sf_username" value="{$searchForm->username}" /><br />
-		<button type="submit" class="pure-button pure-button-primary">Filter</button>
-	</fieldset>
-</form>
-</div>	
-
-{/block}
-
 {block name=bottom}
 
 <div class="bottom-margin">

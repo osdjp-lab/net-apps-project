@@ -1,23 +1,9 @@
 {extends file="main.tpl"}
 
-{block name=top}
-
-<div class="bottom-margin">
-<form class="pure-form pure-form-stacked" action="{$conf->action_url}herbList">
-	<legend>Search options</legend>
-	<fieldset>
-		<input type="text" placeholder="Name" name="sf_name" value="{$searchForm->name}" /><br />
-		<button type="submit" class="pure-button pure-button-primary">Filter</button>
-	</fieldset>
-</form>
-</div>	
-
-{/block}
-
 {block name=bottom}
 
 <div class="bottom-margin">
-<a class="pure-button button-success" href="{$conf->action_root}herbNew">+ Add user</a>
+<a class="pure-button button-success" href="{$conf->action_root}herbNew">+ Add herb</a>
 </div>	
 
 <table id="tab_people" class="pure-table pure-table-bordered">

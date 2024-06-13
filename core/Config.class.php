@@ -11,7 +11,9 @@ class Config{
 	public $action_root;
 	public $action_url;
 
-	public $login_action;
+	public $user_access;
+	public $tree_access;
+	public $herb_access;
 	public $roles;
 
 	public $db_type;

@@ -46,10 +46,23 @@ class HerbListCtrl {
 			getMessages()->addError('Table query error!');
 			if (getConf()->debug) getMessages()->addError($e->getMessage());			
 		}	
-		
-		getSmarty()->assign('searchForm',$this->form);
-		getSmarty()->assign('herbs',$this->records);
-		getSmarty()->display('HerbList.tpl');
+        
+        if (isset(getConf()->roles['permissions'])){
+            $permissions = (int)getConf()->roles['permissions'];
+
+            $herb_access = $permissions & 4;
+
+		    if ($herb_access) {
+		        getSmarty()->assign('searchForm',$this->form);
+		        getSmarty()->assign('herbs',$this->records);
+		        getSmarty()->display('HerbList.tpl');
+            } else {
+                getMessages()->addError("Access not permitted");
+                getSmarty()->display('ErrorPage.tpl');
+            }
+        } else {
+            getMessages()->addError("Access not permitted");
+            getSmarty()->display('ErrorPage.tpl');
+        }
 	}
-	
 }

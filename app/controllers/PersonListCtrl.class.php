@@ -45,12 +45,25 @@ class PersonListCtrl {
 				], $where );
 		} catch (PDOException $e){
 			getMessages()->addError('Table query error!');
-			if (getConf()->debug) getMessages()->addError($e->getMessage());			
-		}	
-		
-		getSmarty()->assign('searchForm',$this->form);
-		getSmarty()->assign('people',$this->records);
-		getSmarty()->display('PersonList.tpl');
-	}
-	
+			if (getConf()->debug) getMessages()->addError($e->getMessage());
+        }
+
+        if (isset(getConf()->roles['permissions'])){
+            $permissions = (int)getConf()->roles['permissions'];
+
+            $user_access = $permissions & 1;
+
+		    if ($user_access) {
+		        getSmarty()->assign('searchForm',$this->form);
+		        getSmarty()->assign('people',$this->records);
+                getSmarty()->display('PersonList.tpl');
+            } else {
+                getMessages()->addError("Access not permitted");
+                getSmarty()->display('ErrorPage.tpl');
+            }
+        } else {
+            getMessages()->addError("Access not permitted");
+            getSmarty()->display('ErrorPage.tpl');
+        }
+   	}
 }

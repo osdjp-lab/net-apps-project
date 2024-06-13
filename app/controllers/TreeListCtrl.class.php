@@ -44,10 +44,24 @@ class TreeListCtrl {
 		} catch (PDOException $e){
 			getMessages()->addError('Table query error!');
 			if (getConf()->debug) getMessages()->addError($e->getMessage());
-		}
-		getSmarty()->assign('searchForm',$this->form);
-		getSmarty()->assign('trees',$this->records);
-		getSmarty()->display('TreeList.tpl');
-	}
+        }
+        
+        if (isset(getConf()->roles['permissions'])){
+            $permissions = (int)getConf()->roles['permissions'];
 
+            $tree_access = $permissions & 2;
+
+            if ($tree_access) {
+                getSmarty()->assign('searchForm',$this->form);
+		        getSmarty()->assign('trees',$this->records);
+		        getSmarty()->display('TreeList.tpl');
+            } else {
+                getMessages()->addError("Access not permitted");
+                getSmarty()->display('ErrorPage.tpl');
+            }
+        } else {
+            getMessages()->addError("Access not permitted");
+            getSmarty()->display('ErrorPage.tpl');
+        }
+	}
 }

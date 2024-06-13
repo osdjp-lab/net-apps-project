@@ -5,7 +5,9 @@ namespace app\controllers;
 use app\forms\LoginForm;
 
 class LoginCtrl{
-	private $form;
+    
+    private $form;
+    private $record;
 	
 	public function __construct(){
 		$this->form = new LoginForm();
@@ -18,33 +20,55 @@ class LoginCtrl{
 		if (!isset($this->form->login)) return false;
 		
 		if (empty($this->form->login)) {
-			getMessages()->addError('Nie podano loginu');
+			getMessages()->addError('No login');
 		}
 		if (empty($this->form->pass)) {
-			getMessages()->addError('Nie podano hasła');
+			getMessages()->addError('No password');
 		}
 
 		if (getMessages()->isError()) return false;
-		
-		if ($this->form->login == "admin" && $this->form->pass == "admin") {
-			addRole('admin');
-		} else if ($this->form->login == "user" && $this->form->pass == "user") {
-			addRole('user');
-		} else {
-			getMessages()->addError('Incorrect login or password');
-		}
-		
+
+        
 		return ! getMessages()->isError();
 	}
 
 	public function action_loginShow(){
 		$this->generateView(); 
-	}
-	
+    }
+
 	public function action_login(){
 		if ($this->validate()){
-			getMessages()->addError('User logged into system.');
-			redirectTo("personList");
+            try {
+				$this->record = getDB()->get("person", "*",[
+					"username" => $this->form->login
+                ]);
+			} catch (PDOException $e){
+				getMessages()->addError('Wystąpił błąd podczas odczytu rekordu');
+                if (getConf()->debug) getMessages()->addError($e->getMessage());
+			}	
+            
+            if ($this->form->pass == $this->record['password']) {
+                getMessages()->addError('User logged into system.');
+
+                $permissions = $this->record['user_access']+$this->record['tree_access']*2+$this->record['herb_access']*4;
+
+                addRole($permissions);
+                if ($this->record['user_access'] == 1) {
+                    redirectTo("personList");
+                }
+                if ($this->record['tree_access'] == 1) {
+                    redirectTo("treeList");
+                }
+                if ($this->record['herb_access'] == 1) {
+                    redirectTo("herbList");
+                }
+                else {
+                    redirectTo('welcomePage');
+                }
+		    } else {
+		    	getMessages()->addError('Incorrect login or password');
+			    $this->generateView(); 
+		    }
 		} else {
 			$this->generateView(); 
 		}		
