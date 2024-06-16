@@ -21,23 +21,23 @@ getRouter()->addRoute('logout',			'LoginCtrl');
 
 // PersonList controls
 getRouter()->addRoute('personList',		'PersonListCtrl');
-getRouter()->addRoute('personNew',		'PersonEditCtrl',	['user','admin']);
-getRouter()->addRoute('personEdit',		'PersonEditCtrl',	['user','admin']);
-getRouter()->addRoute('personSave',		'PersonEditCtrl',	['user','admin']);
-getRouter()->addRoute('personDelete',	'PersonEditCtrl',	['admin']);
+getRouter()->addRoute('personNew',		'PersonEditCtrl');
+getRouter()->addRoute('personEdit',		'PersonEditCtrl');
+getRouter()->addRoute('personSave',		'PersonEditCtrl');
+getRouter()->addRoute('personDelete',	'PersonEditCtrl');
 
 // TreeList controls
 getRouter()->addRoute('treeList',		'TreeListCtrl');
-getRouter()->addRoute('treeNew',		'TreeEditCtrl',	['user','admin']);
-getRouter()->addRoute('treeEdit',		'TreeEditCtrl',	['user','admin']);
-getRouter()->addRoute('treeSave',		'TreeEditCtrl',	['user','admin']);
-getRouter()->addRoute('treeDelete',	    'TreeEditCtrl',	['admin']);
+getRouter()->addRoute('treeNew',		'TreeEditCtrl');
+getRouter()->addRoute('treeEdit',		'TreeEditCtrl');
+getRouter()->addRoute('treeSave',		'TreeEditCtrl');
+getRouter()->addRoute('treeDelete',	    'TreeEditCtrl');
 
 // HerbList controls
 getRouter()->addRoute('herbList',		'HerbListCtrl');
-getRouter()->addRoute('herbNew',		'HerbEditCtrl',	['user','admin']);
-getRouter()->addRoute('herbEdit',		'HerbEditCtrl',	['user','admin']);
-getRouter()->addRoute('herbSave',		'HerbEditCtrl',	['user','admin']);
-getRouter()->addRoute('herbDelete',	    'HerbEditCtrl',	['admin']);
+getRouter()->addRoute('herbNew',		'HerbEditCtrl');
+getRouter()->addRoute('herbEdit',		'HerbEditCtrl');
+getRouter()->addRoute('herbSave',		'HerbEditCtrl');
+getRouter()->addRoute('herbDelete',	    'HerbEditCtrl');
 
 getRouter()->go();

@@ -18,7 +18,7 @@
         
 		<div class="pure-controls">
 			<input type="submit" class="pure-button pure-button-primary" value="Save"/>
-			<a class="pure-button button-secondary" href="{$conf->action_root}treeList">Return to userlist</a>
+			<a class="pure-button button-secondary" href="{$conf->action_root}treeList">Return to tree list</a>
 		</div>
 	</fieldset>
     <input type="hidden" name="id" value="{$form->id}">
